@@ -20,5 +20,3 @@ function! GetRandomLyric()
     let s:ranLine = s:lyrics[GetRandom(s:lineCount)]
     echom s:ranLine
 endfunction
-
-call GetRandomLyric()
