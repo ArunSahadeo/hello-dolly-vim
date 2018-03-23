@@ -1,3 +1,5 @@
+let s:cwd = expand('<sfile>:p:h')
+
 function! GetRandom(size)
 	if has('win32') || has('win32unix')
 		execute '!cmd.exe /C "set /a \"rand=%random% % ' . a:size . '\""'
@@ -8,8 +10,15 @@ function! GetRandom(size)
     return s:ran 
 endfunction
 
-let s:cwd = expand('<sfile>:p:h')
-let s:lyrics = readfile(s:cwd . '/lyrics.txt')
-let s:lineCount = len(s:lyrics)
-let s:ranLine = s:lyrics[GetRandom(s:lineCount)]
-echo s:ranLine
+function! GetRandomLyric()
+    let fileType = expand('%:e')
+    if len(fileType) != 0
+        return
+    endif
+    let s:lyrics = readfile(s:cwd . '/lyrics.txt')
+    let s:lineCount = len(s:lyrics)
+    let s:ranLine = s:lyrics[GetRandom(s:lineCount)]
+    echom s:ranLine
+endfunction
+
+call GetRandomLyric()
